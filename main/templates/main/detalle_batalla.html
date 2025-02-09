@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h2>{{ batalla.spider_man }} vs {{ batalla.enemigo }}</h2>
+<p>Fecha: {{ batalla.fecha }}</p>
+<p>Resultado: {{ batalla.resultado }}</p>
+<h3>Comentarios</h3>
+<ul>
+    {% for comentario in comentarios %}
+    <li>
+        <strong>{{ comentario.usuario.username }}</strong>: {{ comentario.texto }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
