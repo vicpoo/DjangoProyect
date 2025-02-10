@@ -65,6 +65,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "main/static"]  # Ruta a tus archivos estáticos
 
 # Redirecciones de autenticación
+LOGIN_URL = 'login'  # Redirige al formulario de inicio de sesión cuando se requiere autenticación
 LOGIN_REDIRECT_URL = 'home'  # Redirige al inicio después de iniciar sesión
 LOGOUT_REDIRECT_URL = 'home'  # Redirige al inicio después de cerrar sesión
 
