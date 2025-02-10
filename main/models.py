@@ -1,33 +1,38 @@
-"""
-Módulo que define los modelos de la aplicación SpiderVerse.
-Incluye modelos para SpiderMan, Enemigo, Batalla y Comentario.
-"""
-
 from django.db import models
 from django.contrib.auth.models import User
 
+class Universo(models.Model):
+    """
+    Modelo que representa un universo en el que existen Spider-Man y sus enemigos.
+    """
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField()
+
+    def __str__(self):
+        return self.nombre
 
 class SpiderMan(models.Model):
     """
     Modelo que representa una versión de Spider-Man.
     """
     nombre = models.CharField(max_length=100)
-    universo = models.CharField(max_length=100)
+    universo = models.ForeignKey(Universo, on_delete=models.CASCADE, null=True, blank=True)  # Permitir nulos temporalmente
     descripcion = models.TextField()
 
     def __str__(self):
-        return str(self.nombre)
+        return self.nombre
 
 class Enemigo(models.Model):
     """
     Modelo que representa un enemigo de Spider-Man.
     """
     nombre = models.CharField(max_length=100)
+    universo = models.ForeignKey(Universo, on_delete=models.CASCADE, null=True, blank=True)  # Permitir nulos temporalmente
     alias = models.CharField(max_length=100)
     descripcion = models.TextField()
 
     def __str__(self):
-        return str(self.nombre)
+        return self.nombre
 
 class Batalla(models.Model):
     """

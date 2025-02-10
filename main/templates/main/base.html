@@ -1,16 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}SpiderVerse{% endblock %}</title>
-    <!-- Cargar archivos estáticos -->
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/scripts.js' %}"></script>
 </head>
 <body>
     <header>
-        <h1>SpiderVerse</h1>
+        <!-- Cabecera común -->
         <nav>
             <a href="{% url 'home' %}">Inicio</a>
             <a href="{% url 'batallas' %}">Batallas</a>
@@ -18,14 +18,16 @@
                 <a href="{% url 'logout' %}">Cerrar Sesión</a>
             {% else %}
                 <a href="{% url 'login' %}">Iniciar Sesión</a>
-                <a href="{% url 'registro' %}">Registrarse</a>
+                <a href="{% url 'registro' %}">Registro</a>
             {% endif %}
         </nav>
     </header>
     <main>
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
     <footer>
+        <!-- Pie de página común -->
         <p>&copy; 2023 SpiderVerse</p>
     </footer>
 </body>
