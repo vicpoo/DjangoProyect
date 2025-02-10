@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required  # Importar el decorador
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Batalla, Comentario, SpiderMan, Enemigo, Universo
 from .forms import BatallaForm
@@ -12,16 +12,18 @@ def home(request):
     """
     return render(request, 'main/home.html')
 
+@login_required
 def batallas(request):
     """
-    Vista para listar todas las batallas.
+    Vista para listar todas las batallas (requiere autenticación).
     """
     batallas = Batalla.objects.all()
     return render(request, 'main/batallas.html', {'batallas': batallas})
 
+@login_required
 def detalle_batalla(request, id):
     """
-    Vista para mostrar los detalles de una batalla específica.
+    Vista para mostrar los detalles de una batalla específica (requiere autenticación).
     """
     batalla = get_object_or_404(Batalla, id=id)
     comentarios = Comentario.objects.filter(batalla=batalla)

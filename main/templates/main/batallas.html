@@ -2,11 +2,25 @@
 
 {% block content %}
 <h2>Batallas</h2>
+
+{% if batallas %}
 <ul>
     {% for batalla in batallas %}
     <li>
-        <a href="{% url 'detalle_batalla' batalla.id %}">{{ batalla.spider_man }} vs {{ batalla.enemigo }}</a>
+        <a href="{% url 'detalle_batalla' batalla.id %}">
+            {{ batalla.spider_man }} vs {{ batalla.enemigo }} - {{ batalla.fecha }}
+        </a>
     </li>
     {% endfor %}
 </ul>
+{% else %}
+<p>No hay batallas registradas.</p>
+{% endif %}
+
+<!-- Mensaje para usuarios no autenticados -->
+{% if not user.is_authenticated %}
+<div class="auth-message">
+    <p>Para ver las batallas, <a href="{% url 'login' %}">inicia sesión</a> o <a href="{% url 'registro' %}">regístrate</a>.</p>
+</div>
+{% endif %}
 {% endblock %}
