@@ -1,3 +1,4 @@
+#Main/views.py
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -5,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Batalla, Comentario, SpiderMan, Enemigo, Universo
 from .forms import BatallaForm
+import requests
+import json
 
 def home(request):
     """
@@ -113,3 +116,20 @@ def eliminar_batalla(request, id):
     batalla = get_object_or_404(Batalla, id=id)
     batalla.delete()  # Eliminar la batalla
     return redirect('batallas')  # Redirigir a la lista de batallas
+
+def about(request):
+    """
+    Vista para la página de about.
+    """
+    try:
+        response = requests.get('http://10.10.0.43:8000/about/')
+        response.raise_for_status()  # Lanza una excepción si la respuesta no es exitosa
+        lista = response.json()
+    except requests.exceptions.RequestException as e:
+        lista = []
+        messages.error(request, f"Error al obtener la lista: {e}")
+    except json.JSONDecodeError as e:
+        lista = []
+        messages.error(request, f"Error al decodificar la respuesta JSON: {e}")
+
+    return render(request, 'main/about.html', {'lista': lista})

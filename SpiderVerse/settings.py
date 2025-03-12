@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'main',
+    'django_extensions',  # Agrega django-extensions aquí
 ]
 
 MIDDLEWARE = [

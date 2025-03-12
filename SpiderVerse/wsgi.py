@@ -1,3 +1,4 @@
+#wsgi.py
 """
 WSGI config for SpiderVerse project.
 
